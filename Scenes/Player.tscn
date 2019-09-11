@@ -1,0 +1,68 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
+[ext_resource path="res://assets/player/jump.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/shoot.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/run1.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/run2.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/run3.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/run4.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/player-shoot1.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/player-shoot2.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/player-shoot3.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/player-shoot4.png" type="Texture" id=11]
+[ext_resource path="res://assets/player/idle.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=13]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Shoot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "Run",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "RunShoot",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6.64198, 11.0002 )
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( -0.0260124, 0 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "RunShoot"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.263374, 2.89713 )
+shape = SubResource( 2 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 15.58, 0 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 13 )]
+
